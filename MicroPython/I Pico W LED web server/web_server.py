@@ -6,15 +6,9 @@ import urequests as requests
 import time
 from secrets import secrets
 import socket
-import neopixel
 
 # Set country to avoid possible errors
-rp2.country('US')
-
-pixels = neopixel.NeoPixel(machine.Pin(22), 60)
-
-pixels.fill((255,150,50))
-pixels.write()
+rp2.country('DE')
 
 wlan = network.WLAN(network.STA_IF)
 wlan.active(True)
@@ -107,14 +101,11 @@ while True:
         if led_on > -1:
             print('LED ON')
             led.value(1)
-            pixels.fill((255,150,50))
-            pixels.write()
             
         if led_off > -1:
             print('LED OFF')
             led.value(0)
-            pixels.fill((0,0,0))
-            pixels.write()            
+            
         response = get_html('index.html')
         cl.send('HTTP/1.0 200 OK\r\nContent-type: text/html\r\n\r\n')
         cl.send(response)
@@ -128,4 +119,3 @@ while True:
 #request = requests.get('http://www.google.com')
 #print(request.content)
 #request.close()
-
